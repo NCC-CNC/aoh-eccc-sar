@@ -25,16 +25,4 @@ NHCP_projects$SAR_Area <- exact_extract(aoh_richness_layer, NHCP_projects, fun= 
 NHCP_projects$SAR_Area <- NHCP_projects$SAR_Area * 100
 NHCP_projects$SAR_Area_difference <- round(NHCP_projects$SAR_Area - NHCP_projects$area_ha, digits= 0)
 
-sum(NHCP_projects$SAR_Count)
-
-
-## species identities 
-NHCP_SAR <- read_sf("./NHCP_2023_Y1_SAR.shp")
-
-SAR_COUNTS <- NHCP_SAR %>% 
-  group_by(PROJECT_NA) %>% 
-  summarise(distinct_SAR = n_distinct(COSEWICID)) %>% 
-  as.data.frame() 
-
-
-n_distinct(NHCP_SAR$COSEWICID)
+write_csv("./SAR_AOH_NHCP_Counts.csv")
