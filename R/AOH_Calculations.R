@@ -29,6 +29,7 @@ library(raster)
 library(tidyr)
 library(stringr)
 
+## Start timer
 start_time <- Sys.time() 
 
 setwd("C:/aoh-eccc-sar")
@@ -79,11 +80,14 @@ sar_updated_status <- sar_updated_status %>%
 
 sar_list <- sar_list[, 2:6]
 sar_list <- sar_list[!duplicated(sar_list),]
+
+# Join species information: scientific name, common name EN, common name FR
 projects_clean_join <- left_join(projects_clean, sar_list, by = "COSEWICID")
 
+# Join species information: SARA stauts, COSEWIC status 
 projects_clean_join_status <- left_join(projects_clean_join, sar_updated_status, by=c("COM_NAME_E" = "cosewic_match"))
 
-
+# Write csv
 write_csv(projects_clean_join_status, "NHCP_AOH_Projects.csv")
 
 ## End timer
