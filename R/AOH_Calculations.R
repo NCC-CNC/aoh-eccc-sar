@@ -5,7 +5,7 @@
 #
 # Description: Pulls AOH identities and hectares for provided projects 
 #
-# Inputs: Projects shapefiles
+# Inputs: Project shapefiles
 #         AOH maps rolled up to 1KM grid 
 #         SAR Status information from May 2024 SARA list pull
 #
