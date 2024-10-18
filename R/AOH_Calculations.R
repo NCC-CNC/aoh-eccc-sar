@@ -39,6 +39,7 @@ prj <- rast("./AOH_SAR_NULL_1KM/COSEWICID_1004_1KM.tif")
 
 #Load AOH rasters
 aoh_1km <-  list.files("./Data/AOH_SAR_Layers_1KM", pattern=".tif$", full.names = T)
+aoh_moasic <- rast("./Data/Mosaic_AOH_Raster/AOH_1KM_Null_Mosaic.tif")
 
 # Read in projects 
 NHCP_projects <- read_sf("./Data/NHCP/NHCP_2023_Y1_Priority.shp") %>% 
@@ -54,6 +55,9 @@ for (i in aoh_1km){
   
   NHCP_projects[[paste0(name, "_aoh_area")]] <- exact_extract(aoh, NHCP_projects, fun= "sum")
 }
+
+# for full area with overlap
+all_projects$area_from_mosaic <- exact_extract(aoh_moasic, all_projects, fun= 'sum')
 
 # Convert sf object to tibble 
 projects <- as_tibble(NHCP_projects) %>%
